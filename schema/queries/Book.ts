@@ -1,5 +1,5 @@
 import { tempBook } from "db/book"
-import { GraphQLID } from "graphql"
+import { GraphQLID, GraphQLList } from "graphql"
 import { BookType } from "schema/types/Book"
 
 export const GET_BOOK = {
@@ -9,5 +9,12 @@ export const GET_BOOK = {
   },
   resolve(parent: any, args: { id: string }) {
     return tempBook.find((book) => book.id === args.id)
+  },
+}
+
+export const GET_ALL_BOOK = {
+  type: new GraphQLList(BookType),
+  resolve() {
+    return tempBook
   },
 }

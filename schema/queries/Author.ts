@@ -1,5 +1,5 @@
 import { tempAuthor } from "db/author"
-import { GraphQLID } from "graphql"
+import { GraphQLID, GraphQLList } from "graphql"
 import { AuthorType } from "schema/types/Author"
 
 export const GET_AUTHOR = {
@@ -9,5 +9,12 @@ export const GET_AUTHOR = {
   },
   resolve(parent: any, args: { id: string }) {
     return tempAuthor.find((author) => author.id === args.id)
+  },
+}
+
+export const GET_ALL_AUTHOR = {
+  type: new GraphQLList(AuthorType),
+  resolve() {
+    return tempAuthor
   },
 }
